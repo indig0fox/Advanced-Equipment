@@ -31,7 +31,7 @@ private _handle = [
 		(_this select 0) params ['_generator', '_generatorFnc', '_generatorTurnoff'];
 
 		([_generator] call _generatorFnc) params['_powerState', '_newPower'];
-		
+
 		if(!_powerState) then
 		{
 			[_generator, [true]] call _generatorTurnoff;
@@ -53,4 +53,4 @@ private _handle = [
 
 if(_handle < 0) exitWith {throw "GeneratorInitError";};
 
-_generator setVariable ['AE3_power_generatorHandle', _handle];
+_generator setVariable ['AE3_power_generatorHandle', _handle, true];
