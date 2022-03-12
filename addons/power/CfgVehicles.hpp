@@ -1,9 +1,9 @@
 class CfgVehicles 
 {
 	// GENERATOR
-	class B_Quadbike_01_F;
+	class B_Ship_MRLS_01_F;
 	//class Land_PortableGenerator_01_sand_F;
-	class Land_PortableGenerator_01_sand_F_AE3: B_Quadbike_01_F
+	class Land_PortableGenerator_01_sand_F_AE3: B_Ship_MRLS_01_F
 	{
 		// Dragging
         ace_dragging_canDrag = 1;  // Can be dragged (0-no, 1-yes)
