@@ -59,21 +59,23 @@ private _result = _terminalCtrl ctrlAddEventHandler
 
 				if (_terminalApplication isEqualTo "LOGIN") exitWith
 				{
-					[_computer, _keyChar] call AE3_armaos_fnc_terminal_addChar;
+					//[_computer, _keyChar] call AE3_armaos_fnc_terminal_addChar;
+					[_computer, _keyChar] call AE3_armaos_fnc_terminal_addCharToInput;
 				};
 				if (_terminalApplication isEqualTo "PASSWORD") exitWith
 				{
-					[_computer, "*"] call AE3_armaos_fnc_terminal_addChar;
+					//[_computer, "*"] call AE3_armaos_fnc_terminal_addChar;
 					[_computer, _keyChar] call AE3_armaos_fnc_terminal_addCharToInput;
 				};
 				if (_terminalApplication isEqualTo "INPUT") exitWith
 				{
-					[_computer, _keyChar] call AE3_armaos_fnc_terminal_addChar;
+					//[_computer, _keyChar] call AE3_armaos_fnc_terminal_addChar;
 					[_computer, _keyChar] call AE3_armaos_fnc_terminal_addCharToInput;
 				};
 				if (_terminalApplication isEqualTo "SHELL") exitWith
 				{
-					[_computer, _keyChar] call AE3_armaos_fnc_terminal_addChar;
+					//[_computer, _keyChar] call AE3_armaos_fnc_terminal_addChar;
+					[_computer, _keyChar] call AE3_armaos_fnc_terminal_addCharToInput;
 				};
 			};
 		};
@@ -88,21 +90,23 @@ private _result = _terminalCtrl ctrlAddEventHandler
 
 				if (_terminalApplication isEqualTo "LOGIN") exitWith
 				{
-					[_computer] call AE3_armaos_fnc_terminal_removeChar;
+					//[_computer] call AE3_armaos_fnc_terminal_removeChar;
+					[_computer] call AE3_armaos_fnc_terminal_removeCharFromInput;
 				};
 				if (_terminalApplication isEqualTo "PASSWORD") exitWith
 				{
-					[_computer] call AE3_armaos_fnc_terminal_removeChar;
+					//[_computer] call AE3_armaos_fnc_terminal_removeChar;
 					[_computer] call AE3_armaos_fnc_terminal_removeCharFromInput;
 				};
 				if (_terminalApplication isEqualTo "INPUT") exitWith
 				{
-					[_computer] call AE3_armaos_fnc_terminal_removeChar;
+					//[_computer] call AE3_armaos_fnc_terminal_removeChar;
 					[_computer] call AE3_armaos_fnc_terminal_removeCharFromInput;
 				};
 				if (_terminalApplication isEqualTo "SHELL") exitWith
 				{
-					[_computer] call AE3_armaos_fnc_terminal_removeChar;
+					[_computer] call AE3_armaos_fnc_terminal_removeCharFromInput;
+					//[_computer] call AE3_armaos_fnc_terminal_removeChar;
 				};
 			};
 		};
@@ -113,29 +117,34 @@ private _result = _terminalCtrl ctrlAddEventHandler
 		{
 			private _lastBufferLine = _terminalBuffer # (_lastBufferLineIndex);
 
-			private _input = _lastBufferLine select [(count _terminalPrompt), (count _lastBufferLine)];
+			private _input = "" + (_terminal get "AE3_terminalInputBuffer");
 
-			[_terminalApplication, _computer, _input] call
+			if (_terminalApplication isEqualTo "LOGIN") exitWith
 			{
-				params ['_terminalApplication', '_computer', '_input'];
-
-				if (_terminalApplication isEqualTo "LOGIN") exitWith
-				{
-					[_computer, _input] call AE3_armaos_fnc_shell_findLoginUser;
-				};
-				if (_terminalApplication isEqualTo "PASSWORD") exitWith
-				{
-					[_computer] call AE3_armaos_fnc_shell_validatePassword;
-				};
-				if (_terminalApplication isEqualTo "INPUT") exitWith
-				{
-					[_computer, ""] call AE3_armaos_fnc_terminal_setInputMode;
-				};
-				if (_terminalApplication isEqualTo "SHELL") exitWith
-				{
-					[_computer, _input] spawn AE3_armaos_fnc_shell_process;
-				};
+				_terminal set ["AE3_terminalInputBuffer", ""];
+				[_computer, _input] call AE3_armaos_fnc_terminal_addString;
+				[_computer, _input] call AE3_armaos_fnc_shell_findLoginUser;
 			};
+			if (_terminalApplication isEqualTo "PASSWORD") exitWith
+			{
+				[_computer] call AE3_armaos_fnc_shell_validatePassword;
+				_terminal set ["AE3_terminalInputBuffer", ""];
+
+				[_computer, _input] call AE3_armaos_fnc_terminal_addString;
+			};
+			if (_terminalApplication isEqualTo "INPUT") exitWith
+			{
+				[_computer, ""] call AE3_armaos_fnc_terminal_setInputMode;
+			};
+			if (_terminalApplication isEqualTo "SHELL") exitWith
+			{
+				_terminal set ["AE3_terminalInputBuffer", ""];
+				[_computer] call AE3_armaos_fnc_terminal_setPrompt;
+				[_computer, _input] call AE3_armaos_fnc_terminal_addString;
+
+				[_computer, _input] spawn AE3_armaos_fnc_shell_process;
+			};
+			
 		};
 
 		/* ---------------------------------------- */

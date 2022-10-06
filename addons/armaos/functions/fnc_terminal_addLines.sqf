@@ -20,11 +20,16 @@ private _terminalMaxColumns = _terminal get "AE3_terminalMaxColumns";
 _croppedOutputLines = [];
 {
 	private _tmpLine = _x;
-	while {(count _tmpLine) >= _terminalMaxColumns} do
+
+	if (!(_tmpLine isEqualTo (text ""))) then
 	{
-		_croppedOutputLines pushBack (_tmpLine select [0, _terminalMaxColumns + 1]);
-		_tmpLine = _tmpLine select [_terminalMaxColumns + 1];
+		while {(count _tmpLine) >= _terminalMaxColumns} do
+		{
+			_croppedOutputLines pushBack text (_tmpLine select [0, _terminalMaxColumns + 1]);
+			_tmpLine = text (_tmpLine select [_terminalMaxColumns + 1]);
+		};
 	};
+
 	_croppedOutputLines pushBack _tmpLine;
 	
 } forEach _outputLines;

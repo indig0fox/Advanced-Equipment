@@ -18,6 +18,23 @@ private _terminalMaxRows = _terminal get "AE3_terminalMaxRows";
 
 private _terminalScrollPosition = _terminal get "AE3_terminalScrollPosition";
 
+private _terminalInputBuffer = "";
+
+if (!isNil { _terminal get "AE3_terminalInputBuffer" }) then 
+{
+	_terminalApplication = _terminal get "AE3_terminalApplication";
+
+	if(_terminalApplication isEqualTo "PASSWORD") then {
+		for "_i" from 0 to (count (_terminal get "AE3_terminalInputBuffer"))-1 do 
+		{ 
+			_terminalInputBuffer = _terminalInputBuffer + "*"
+		};
+	}else
+	{
+		_terminalInputBuffer = +_terminal get "AE3_terminalInputBuffer";
+	}
+};
+
 private _terminalBufferLength = count _terminalBuffer;
 private _lastBufferLineIndex = _terminalBufferLength - 1;
 
@@ -28,7 +45,7 @@ private _terminalBufferVisable = +_terminalBuffer;
 private _lastBufferVisableLineIndex = (count _terminalBufferVisable) - 1;
 private _lastBufferVisableLine = _terminalBufferVisable # (_lastBufferVisableLineIndex);
 
-_lastBufferVisableLine = _lastBufferVisableLine + "¶";
+_lastBufferVisableLine = composeText [_lastBufferVisableLine, text (_terminalInputBuffer + "¶")];
 
 _terminalBufferVisable set [_lastBufferVisableLineIndex, _lastBufferVisableLine];
 

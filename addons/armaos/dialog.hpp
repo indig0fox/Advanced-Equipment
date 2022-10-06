@@ -83,6 +83,7 @@ class AE3_ArmaOS_Main_Dialog
 			style = ST_MULTI;
 			lineSpacing = 1;
 			font = "EtelkaMonospacePro";
+			size = 0.04;
 		};
 		class RscButton_1300: RscButton
 		{

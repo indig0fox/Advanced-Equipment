@@ -27,7 +27,7 @@ if (_lastBufferLineIndex >= -1) then
 
 _terminalCursorPosition = _terminalCursorPosition + 1;
 
-if ((count _lastBufferLine) < _terminalMaxColumns) then
+if ((count str _lastBufferLine) < _terminalMaxColumns) then
 {
 	_lastBufferLine = _lastBufferLine + _inputChar;
 };

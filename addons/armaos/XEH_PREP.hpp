@@ -51,6 +51,7 @@ PREP(terminal_addEventHandler);
 PREP(terminal_addChar);
 PREP(terminal_addCharToInput);
 PREP(terminal_addLines);
+PREP(terminal_addString);
 PREP(terminal_removeChar);
 PREP(terminal_removeCharFromInput);
 PREP(terminal_addHeader);

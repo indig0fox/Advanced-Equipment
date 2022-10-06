@@ -22,13 +22,13 @@ private _lastBufferLine = _terminalBuffer # (_lastBufferLineIndex);
 private _terminalMaxRows = 25;
 private _terminalMaxColumns = 50;
 
-if ((count _lastBufferLine) > (count _terminalPrompt)) then
+if ((count str _lastBufferLine) > (count _terminalPrompt)) then
 {
 	_terminalCursorPosition = _terminalCursorPosition - 1;
-	_lastBufferLine = _lastBufferLine select [0, (count _lastBufferLine) - 1];
+	_lastBufferLine = (str _lastBufferLine) select [0, (count _lastBufferLine) - 1];
 };
 
-_terminalBuffer set [_lastBufferLineIndex, _lastBufferLine];
+_terminalBuffer set [_lastBufferLineIndex, text _lastBufferLine];
 
 _terminal set ["AE3_terminalBuffer", _terminalBuffer];
 _terminal set ["AE3_terminalCursorPosition", _terminalCursorPosition];
