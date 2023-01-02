@@ -300,6 +300,16 @@ class CfgVehicles
 			};
 		};
 
+		class AE3_USB_Interface
+		{
+			class Interface
+			{
+				rel_pos = [-0.18, 0.01, 0.012735];
+				rot_yaw = 0;
+				rot_pitch = 0;
+				rot_roll = 0;
+			};
+		};
 		
         class ACE_Actions 
 		{
