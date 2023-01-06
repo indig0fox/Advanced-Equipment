@@ -78,6 +78,24 @@ class CfgVehicles
 			};
 		};
 
+		class AE3_USB_Interface
+		{
+			class USB0
+			{
+				rel_pos[] = {-0.19, 0.042, -0.145};
+				rot_yaw = 90;
+				rot_pitch = 0;
+				rot_roll = 0;
+			};
+
+			class USB1
+			{
+				rel_pos[] = {-0.19, -0.028, -0.145};
+				rot_yaw = 90;
+				rot_pitch = 0;
+				rot_roll = 180;
+			};
+		};
 		
         class ACE_Actions 
 		{
@@ -189,6 +207,24 @@ class CfgVehicles
 			};
 		};
 
+		class AE3_USB_Interface
+		{
+			class USB0
+			{
+				rel_pos[] = {-0.19, 0.042, -0.145};
+				rot_yaw = 90;
+				rot_pitch = 0;
+				rot_roll = 0;
+			};
+
+			class USB1
+			{
+				rel_pos[] = {-0.19, -0.028, -0.145};
+				rot_yaw = 90;
+				rot_pitch = 0;
+				rot_roll = 180;
+			};
+		};
 		
         class ACE_Actions 
 		{
@@ -304,10 +340,18 @@ class CfgVehicles
 		{
 			class USB0
 			{
-				rel_pos[] = {-0.19, 0.012, -0.145};
+				rel_pos[] = {-0.19, 0.042, -0.145};
 				rot_yaw = 90;
 				rot_pitch = 0;
 				rot_roll = 0;
+			};
+
+			class USB1
+			{
+				rel_pos[] = {-0.19, -0.028, -0.145};
+				rot_yaw = 90;
+				rot_pitch = 0;
+				rot_roll = 180;
 			};
 		};
 		
